@@ -34,7 +34,7 @@ namespace GradeBook
             foreach (var grade in grades)
             {
                 result.Low = Math.Min(grade, result.Low);
-                result.High = Math.Max(grade, result.Low);
+                result.High = Math.Max(grade, result.High);
                 result.Average += grade;
             }
             result.Average /= grades.Count;
