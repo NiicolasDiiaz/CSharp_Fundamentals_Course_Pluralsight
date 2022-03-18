@@ -8,14 +8,14 @@ namespace GradeBook
 {
     public class Book
     {
-        private string name;
+        public string Name;
         private List<double> grades;
 
 
         public Book(string name)
         {
             grades = new List<double>();
-            this.name = name;
+            this.Name = name;
         }
 
 
