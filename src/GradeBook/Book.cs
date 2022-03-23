@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GradeBook
+﻿namespace GradeBook
 {
+    public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
     public class Book
     {
-        public string Name;
+        public string Name { get; set; }
         private List<double> grades;
 
+        public const string CATEGORY = "Science";
+
+        public event GradeAddedDelegate GradeAdded;
 
         public Book(string name)
         {
@@ -18,7 +17,7 @@ namespace GradeBook
             this.Name = name;
         }
 
-        public void AddLetterGrade(char letter)
+        public void AddGrade(char letter)
         {
             switch (letter)
             {
@@ -42,9 +41,13 @@ namespace GradeBook
 
         public void AddGrade(double grade)
         {
-            if(grade <= 100 && grade >= 0)
+            if (grade <= 100 && grade >= 0)
             {
                 grades.Add(grade);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
@@ -59,7 +62,7 @@ namespace GradeBook
             result.High = double.MinValue;
             result.Low = double.MaxValue;
 
-            foreach (var grade in grades) 
+            foreach (var grade in grades)
             {
                 result.Low = Math.Min(grade, result.Low);
                 result.High = Math.Max(grade, result.High);
