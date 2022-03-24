@@ -1,6 +1,6 @@
 ﻿using GradeBook;
 
-var book = new InMemoryBook("Scott's Grade Book");
+var book = new DiskBook("Scott's Grade Book");
 book.GradeAdded += OnGradeAdded;
 
 EnterGrades(book);
